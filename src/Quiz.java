@@ -4,7 +4,7 @@ public class Quiz {
 	public static void main(String[] args) {
 		
 		// Question 1
-		MultipleChoiceQuestion question = new MultipleChoiceQuestion(
+		Question question = new MultipleChoiceQuestion(
 				"Q1. What is the Captital of Canada?",
 				"Toronto",
 				"Vancouver",
@@ -63,8 +63,28 @@ public class Quiz {
 		
 		question.check();
 		
+		// Question 6 - True or False Question
+		question = new TrueFalseQuestion("iPhones are made by Samsung Electronics?", "f");
+		question.check();
+		
+		// Question 7 - True or False Question
+		question = new TrueFalseQuestion("Spain is a country in Europe", "t");
+		question.check();
+		
+		// Question 8 - True or False Question
+		question = new TrueFalseQuestion("Donald Trump is no longer the president of the USA", "t");
+		question.check();
+		
+		// Question 9 - True or False Question
+		question = new TrueFalseQuestion("3 + 3 = 9", "f");
+		question.check();
+		
+		// Question 10 - True or False Question
+		question = new TrueFalseQuestion("A triangle has four equal sides", "f");
+		question.check();
+		
 		
 		// Show Results
-		MultipleChoiceQuestion.showResults();
+		Question.showResults();
 	}
 }
