@@ -1,12 +1,29 @@
-import javax.swing.JOptionPane;
+import javax.swing.*;
 
 public class TrueFalseQuestion extends Question {
 	
 	// Add Constructor
 	TrueFalseQuestion(String question, String answer)
 	{
+		// call super constructor
+		super(question);
+		
+		// Create new JPanel
+		JPanel buttons = new JPanel();
+		
+		// Add TRUE Button
+		addButton(buttons, "TRUE");
+		
+		// Add FALSE Button
+		addButton(buttons, "FALSE");
+		
+		// Add buttons panel to dialog box.
+		this.question.add(buttons);
+		
 		// Initialize question
-		this.question = "TRUE or FALSE: " + question;
+		initQuestionDialog();
+		
+		
 		
 		
 		answer = answer.toUpperCase();
@@ -31,28 +48,18 @@ public class TrueFalseQuestion extends Question {
 		
 	}
 	
-	@Override
-	String ask() {
+	/*
+	 * Button add method
+	 */
+	void addButton(JPanel buttons, String label) {
 		
-		while(true) {
-			// Ask the question
-			String answer = JOptionPane.showInputDialog(question);
-			
-			// Change answer to upper case
-			answer = answer.toUpperCase();
-			
-			if(answer.equals("F") || answer.equals("FALSE") || answer.equals("N") || answer.equals("NO")) // Valid option.
-			{
-				return "FALSE";
-			}
-			else if(answer.equals("T") || answer.equals("TRUE") || answer.equals("Y") || answer.equals("YES"))// Valid option
-			{
-				return "TRUE";
-			}
-			else // Invalid option
-			{
-				JOptionPane.showMessageDialog(null, "Invalid answer. Please enter TRUE or FALSE");
-			}
-		}
+		// Create new button
+		JButton button = new JButton(label);
+		
+		// Add event Listener to button
+		button.addActionListener(question);
+		
+		// Add button to buttons panel
+		buttons.add(button);
 	}
 }

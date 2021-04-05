@@ -1,4 +1,5 @@
-import javax.swing.JOptionPane;
+import java.awt.*;
+import javax.swing.*;
 
 public abstract class Question {
 	
@@ -7,12 +8,52 @@ public abstract class Question {
 	static int nCorrect = 0;
 	
 	// Declare instance variables
-	String question;
+	QuestionDialog question;
 	String correctAnswer;
 	
-	// Declare abstract method for ask().
-	abstract String ask();
+	/*
+	 * Constructor
+	 */
+	Question(String question) {
+		// Initialize question
+		this.question = new QuestionDialog();
+		
+		// Add grid layout
+		this.question.setLayout(new GridLayout(0, 1));
+		
+		// Add question
+		this.question.add(new JLabel("   " + question + "   ", JLabel.CENTER));
+
+	}
 	
+	/*
+	 * Ask method
+	 */
+	String ask() {
+		// Show question
+		question.setVisible(true);
+		
+		// return answer
+		return question.answer;
+	}
+	
+	/*
+	 * Initialize question instance
+	 */
+	void initQuestionDialog() {
+		// Make dialog box modal.
+		this.question.setModal(true);
+		
+		// Dynamically resize dialog box
+		this.question.pack();
+		
+		// Center the dialog box
+		this.question.setLocationRelativeTo(null);
+	}
+	
+	/*
+	 * Check answer
+	 */
 	void check() {
 		// Ask question
 		String answer = ask();

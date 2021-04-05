@@ -1,49 +1,50 @@
-import java.util.Arrays;
-import java.util.List;
-
-import javax.swing.JOptionPane;
+import java.awt.*;
+import javax.swing.*;
 
 public class MultipleChoiceQuestion extends Question {
 	
 	// Constructor
 	MultipleChoiceQuestion(String query, String a, String b, String c, String d, String e, String answer)
 	{
-		// Initialize question
-		question = query + "\n";
-		question += "A. " + a + "\n";
-		question += "B. " + b + "\n";
-		question += "C. " + c + "\n";
-		question += "D. " + d + "\n";
-		question += "E. " + e + "\n";
+		
+		// call super constructor
+		super(query);
+		
+		// Add choices A to E
+		addChoice("A", a);
+		addChoice("B", b);
+		addChoice("C", c);
+		addChoice("D", d);
+		addChoice("E", e);
+		
+		// Initialize questions
+		initQuestionDialog();
 		
 		// Initialize correctAnswer
 		correctAnswer = answer.toUpperCase();
 	}
 	
-	@Override
-	String ask() {
-		// Create list of possible valid options
-		String[] options = {"A", "B", "C", "D", "E"};
+	/*
+	 * Method to add choice
+	 */
+	void addChoice(String name, String label) {
+		// Create panel
+		JPanel choice = new JPanel(new BorderLayout());
 		
-		// Convert to list
-		List<String> list = Arrays.asList(options);
+		// Create a button with a given name
+		JButton button = new JButton(name);
 		
-		while(true) {
-			// Ask the question
-			String answer = JOptionPane.showInputDialog(question);
-			
-			// Change answer to upper case
-			answer = answer.toUpperCase();
-			
-			if(list.contains(answer)) // Valid option.
-			{
-				return answer;
-			}
-			else // Invalid option
-			{
-				JOptionPane.showMessageDialog(null, "Invalid answer. Please enter A, B, C, D, or E");
-			}
-		}
+		// Add event listener to button
+		button.addActionListener(question);
+		
+		// Add button to choice panel
+		choice.add(button, BorderLayout.WEST);
+		
+		// Add answer label to center section of the panel
+		choice.add(new JLabel(label + "   ", JLabel.LEFT), BorderLayout.CENTER);
+		
+		// Add panel to dialog box
+		question.add(choice);
 	}
 	
 }
